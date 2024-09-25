@@ -1,5 +1,5 @@
 function photographerTemplate(data) {
-    const { name, portrait,city,country,tagline,price } = data
+    const { name, portrait,city,country,tagline,price, id } = data
 
     const picture = `assets/photographers/${portrait}`
 
@@ -10,7 +10,7 @@ function photographerTemplate(data) {
         //lien vers page photographe
         const link = document.createElement('a')
         link.classList.add('photographer-link')
-        link.setAttribute('href', '')
+        link.setAttribute('href', `photographer.html?id=${id}`)
         link.setAttribute('aria-label',`Voir la page du photographe ${name}`)
         
 
