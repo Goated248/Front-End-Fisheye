@@ -1,7 +1,30 @@
+import {MediaFactory} from '../factories/MediaFactory.js'
+
 async function getPhotographers() {
     const response = await fetch ('data/photographers.json')
     const data = await response.json()
     return data.photographers
+    
+}
+
+async function getMedia () {
+    const response = await fetch('data/photographers.json')
+    const data = await response.json()
+    return data.media
+
+}
+
+async function displayMedia(photographerId) {
+    const mediaList = await getMedia()
+    const photographerMedia = mediaList.filter(media=>media.photographerId == photographerId)
+
+    const mediaContainer = document.querySelector('.media-gallery')
+
+    photographerMedia.forEach(media => {
+        const mediaFactory = new MediaFactory(media)
+        const mediaElement = mediaFactory.createMedia()
+        mediaContainer.appendChild(mediaElement)
+    });
     
 }
 
@@ -40,6 +63,9 @@ async function displayPhotographer() {
         img.setAttribute("alt", `${photographer.name}`)
 
         imgContainer.appendChild (img)
+
+
+        displayMedia(photographer.id)
 
     } else {
         console.error('error')
