@@ -22,7 +22,7 @@ header {
     height: 90px;
 }
 
-h1 {
+header h1 {
     color:var(--primary-main);
     margin-right: 100px;
 }
@@ -95,5 +95,6 @@ h1 {
     height: 200px;
     width: 200px;
     border-radius:50%;
+   
     
 }

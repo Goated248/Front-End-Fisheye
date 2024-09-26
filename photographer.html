@@ -9,25 +9,25 @@
   </head>
   <body>
     <header role="banner">
-      <img src="assets/images/logo.png" class="logo" tabindex="0" alt="fisheye Home page"/>
+      <a href="index.html"><img src="assets/images/logo.png" class="logo" tabindex="0" alt="fisheye Home page"/></a>
     </header>
 
     <main id="main">
 
-      <section class="photograph-header">
-        <div class="header-txt" ></div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <div id="portrait-container"></div>
+      <section class="photograph-header" tabindex="0">
+        <div class="header-txt" tab index ="0"></div>
+        <button class="contact_button" tabindex="0" onclick="displayModal()">Contactez-moi</button>
+        <div id="portrait-container" tabindex="0"></div>
       </section>
 
-      <section class="tri">
+      <section class="tri" tabindex="0">
         <p>Trier par</p>
         <div class="btn-tri"></div>
       </section>
       <section class ="media-gallery"></section>
       
 
-      
+      <div class="total-likes_price" tabindex="0"></div>
     </main>
 
 
@@ -38,10 +38,40 @@
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
 				<form>
-					<div>
+					<div class="form-data">
 						<label>Prénom</label>
-						<input />
+            <input  
+            class="text-control"
+            type="text"
+            id="first"
+            name="first"/>
 					</div>
+          <div class="form-data">
+						<label>Nom</label>
+            <input  
+            class="text-control"
+            type="text"
+            id="last"
+            name="last"/>
+					</div>
+          <div class="formData">
+         <label>E-mail</label>
+          <input
+            class="text-control"
+            type="email"
+            id="email"
+            name="email"/>
+        </div>
+        <div
+        class="formData">
+        <label>Votre message</label>
+        <input
+          class="text-control"
+          type="text-area"
+          id="text"
+          name="text" />
+       
+      </div>
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>

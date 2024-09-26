@@ -1,6 +1,8 @@
 export class MediaFactory {
     constructor(media){
         this._media = media
+        this._title = media.title
+        this._likes = media.likes
     }
 
     createMedia() {
@@ -30,5 +32,17 @@ export class MediaFactory {
         return video
     }
 
+    createTitle() {
+        const title = document.createElement('h2') 
+        title.textContent = this._title
+        title.classList.add('media-title')
+        return title
+    }
 
+    createLikes() {
+        const likes = document.createElement('p')
+        likes.textContent = this._likes
+        likes.classList.add('media-likes')
+        return likes
+    }
 }

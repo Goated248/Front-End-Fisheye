@@ -13,7 +13,7 @@ function photographerTemplate(data) {
         link.setAttribute('href', `photographer.html?id=${id}`)
         link.setAttribute('aria-label',`Voir la page du photographe ${name}`)
         
-
+        //ajoute image et nom
         const img = document.createElement( 'img' )
         img.setAttribute("src", picture)
         img.setAttribute("alt", `${name}`)
