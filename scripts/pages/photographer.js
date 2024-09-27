@@ -1,4 +1,6 @@
 import {MediaFactory} from '../factories/MediaFactory.js'
+import { Lightbox } from '../utils/lightbox.js'
+
 //recupération des photographes
 async function getPhotographers() {
     const response = await fetch ('data/photographers.json')
@@ -29,7 +31,7 @@ async function displayMedia(photographerId) {
 
     const mediaContainer = document.querySelector('.media-gallery')
 
-    photographerMedia.forEach(media => {
+    photographerMedia.forEach((media, index )=> {
         const mediaFactory = new MediaFactory(media)
 
         const mediaElement = mediaFactory.createMedia()
@@ -38,19 +40,31 @@ async function displayMedia(photographerId) {
 
 
         const mediaCard = document.createElement('div')
-        const mediaWindow = document.createElement('div')
-        const mediaTxt = document.createElement('div')
-        mediaCard.setAttribute('tabindex','0')
+         mediaCard.setAttribute('tabindex','0')
         mediaCard.classList.add('media-card')
-        mediaWindow.classList.add('media-window')
-        mediaTxt.classList.add('media-txt')
 
+        const mediaWindow = document.createElement('div')
+        mediaWindow.classList.add('media-window')
+        const mediaTxt = document.createElement('div')
+        mediaTxt.classList.add('media-txt')
+        
         mediaWindow.appendChild(mediaElement)
         mediaTxt.appendChild(titleElement)
         mediaTxt.appendChild(likesElement)
+
+        const heartIcon =document.createElement('i')
+        heartIcon.classList.add('fa-solid','fa-heart','heart-icon')
+        likesElement.appendChild(heartIcon)
+
         mediaCard.appendChild(mediaWindow)
         mediaCard.appendChild(mediaTxt)
         mediaContainer.appendChild(mediaCard)
+
+        mediaCard.addEventListener('click',()=>{
+            const lightbox = new Lightbox (photographerMedia, index)
+            lightbox.open()
+        })
+
     });
     
 }

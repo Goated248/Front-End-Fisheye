@@ -222,6 +222,7 @@ h2{
     color:var(--primary-main);
     font-size: 24px;
     font-weight: 500;
+    margin: 0;
 }
 
 .total-likes_price {
@@ -242,4 +243,59 @@ h2{
     font-size: 24px;
     font-weight: 500;
     color:black
+}
+
+.lightbox-modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(196, 196, 196, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-modal_body {
+    width: 100%;
+    max-width: 1242px;
+    height: 920px;
+    background-color:white ;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.lightbox-container img {
+    width: 1050px;
+    height: 900px;
+    border-radius: 5px;
+}
+
+.lightbox-close, 
+.lightbox-next, 
+.lightbox-prev{
+    background: none;
+    color: var(--primary-main);
+    border: none;
+    font-size: 35px;
+}
+
+.lightbox-close{
+    position: absolute;
+    top:0;
+    right: 25px;
+}
+.photographer-total_likes{
+    position: relative;
+}
+
+.likes-icon {
+    position: absolute;
+    left: 85px;
 }

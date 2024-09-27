@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <title>Fisheye - photographe </title>
   </head>
   <body>
@@ -27,10 +29,13 @@
       <section class ="media-gallery"></section>
       
 
-      <div class="total-likes_price" tabindex="0"></div>
+      <div class="total-likes_price" tabindex="0">
+        <div class = "likes-icon" ><i class="fa-solid fa-heart"></i></div>
+      </div>
+
     </main>
 
-
+    <!--formulaire de contact-->
     <div class="bground" role="dialog" id="contact_modal">
 			<div class="modal">
 				<header>
@@ -76,8 +81,15 @@
         </div>
 			</div>
 		</div>
-
-
+    <!--lightbox-->
+    <div class="lightbox-modal"role="dialog">
+    <div class="lightbox-modal_body">
+      <button class="lightbox-close"><i class="fa-solid fa-xmark"></i></button>
+      <button class="lightbox-prev"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="lightbox-container"></div>
+      <button class="lightbox-next"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
     <script type="module" src="/scripts/pages/photographer.js" defer></script>
     <script src="/scripts/utils/contactForm.js" defer></script>
   </body>
