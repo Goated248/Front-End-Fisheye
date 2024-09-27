@@ -20,6 +20,7 @@ function photographerTemplate(data) {
 
         const h2 = document.createElement( 'h2' )
         h2.textContent = name
+        h2.classList.add('photographer-name')
 
         link.appendChild(img)
         link.appendChild(h2)

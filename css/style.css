@@ -85,7 +85,7 @@ header h1 {
     margin-bottom: 0;   
 }
 
-.photographer_section article h2 {
+.photographer-name {
     color: var(--primary-second);
     font-size: 36px;
     margin:10px;

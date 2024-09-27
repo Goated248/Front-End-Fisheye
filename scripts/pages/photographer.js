@@ -66,6 +66,9 @@ async function displayPhotographer() {
 //affiche le photographe en fonction de l'id
     if (photographer) {
         const headerTxt = document.querySelector('.header-txt')
+        const headerTitle = document.createElement('div')
+        const headerSubtext = document.createElement('div')
+        headerSubtext.setAttribute("tabindex", "0")
         //gere les text du header
         const  nameEl = document.createElement('h1')
         nameEl.textContent = photographer.name
@@ -80,9 +83,12 @@ async function displayPhotographer() {
         taglineElement.textContent= photographer.tagline
         taglineElement.classList.add('header-tagline')
 
-        headerTxt.appendChild(nameEl)
-        headerTxt.appendChild(locationEL)
-        headerTxt.appendChild(taglineElement)
+        headerTitle.appendChild(nameEl)
+        headerSubtext.appendChild(locationEL)
+        headerSubtext.appendChild(taglineElement)
+        headerTxt.appendChild(headerTitle)
+        headerTxt.appendChild(headerSubtext)
+        
        
         //gere l'image du header
         const imgContainer = document.getElementById('portrait-container')
