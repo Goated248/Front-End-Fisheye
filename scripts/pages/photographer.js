@@ -1,6 +1,8 @@
 import {MediaFactory} from '../factories/MediaFactory.js'
 import { Lightbox } from '../utils/lightbox.js'
 import { LikesManagement } from '../utils/likesCount.js'
+import { sortMedia } from '../utils/tri.js'
+
 //recupération des photographes
 async function getPhotographers() {
     const response = await fetch ('data/photographers.json')
@@ -25,14 +27,15 @@ async function calculateTotalLikes() {
 }
 
 //creer la media gallery
-async function displayMedia(photographerId,likesEl) {
-    const mediaList = await getMedia()
+async function displayMedia(photographerId,likesEl, sortedMedialist = null) {
+    const mediaList = sortedMedialist || await getMedia()
     
     const photographerMedia = mediaList.filter(media=>media.photographerId == photographerId)
 
     const mediaContainer = document.querySelector('.media-gallery')
     const likesManagement = new LikesManagement(mediaList)
-
+    
+    mediaContainer.innerHTML = ''
 //creer les elements
     photographerMedia.forEach((media, index )=> {
         const mediaFactory = new MediaFactory(media)
@@ -64,9 +67,9 @@ async function displayMedia(photographerId,likesEl) {
         mediaContainer.appendChild(mediaCard)
 
         likesElement.addEventListener('click', (event) => {
-            event.stopPropagation(); // Empêche la propagation du clic
-            const mediaId = media.id; // Utilise l'ID du média directement
-            likesManagement.likesCount(mediaId, likesElement, likesEl); // Gère le clic sur les likes
+            event.stopPropagation(); 
+            const mediaId = media.id; 
+            likesManagement.likesCount(mediaId, likesElement, likesEl); 
         });
 //ajoute eventlistner sur les media pour ouvrir lightbox
         mediaCard.addEventListener('click',()=>{
@@ -85,8 +88,6 @@ async function displayPhotographer() {
     const id = params.get('id')
     const photographers = await getPhotographers()
     const photographer= photographers.find(p=>p.id == id)
-
-    const mediaList = await getMedia()
 
     const totalLikes = await calculateTotalLikes()
     
@@ -145,6 +146,16 @@ async function displayPhotographer() {
         
         
          await displayMedia(photographer.id, likesEl)
+
+         //ajoute écouteur sur menu déroulant pour gérer tri
+         const sortSelect = document.getElementById('tri-select')
+         sortSelect.addEventListener ('change', async function (event) {
+            let selectedOption = event.target.value
+            const mediaList = await getMedia()
+
+            const sortedMedia = sortMedia(mediaList,selectedOption)
+            await displayMedia(photographer.id, likesEl, sortedMedia)
+         })
 
     } else {
         console.error('error')
