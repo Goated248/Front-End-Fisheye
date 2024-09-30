@@ -1,6 +1,6 @@
 import {MediaFactory} from '../factories/MediaFactory.js'
 import { Lightbox } from '../utils/lightbox.js'
-
+import { LikesManagement } from '../utils/likesCount.js'
 //recupération des photographes
 async function getPhotographers() {
     const response = await fetch ('data/photographers.json')
@@ -25,19 +25,22 @@ async function calculateTotalLikes() {
 }
 
 //creer la media gallery
-async function displayMedia(photographerId) {
+async function displayMedia(photographerId,likesEl) {
     const mediaList = await getMedia()
+    
     const photographerMedia = mediaList.filter(media=>media.photographerId == photographerId)
 
     const mediaContainer = document.querySelector('.media-gallery')
+    const likesManagement = new LikesManagement(mediaList)
 
+//creer les elements
     photographerMedia.forEach((media, index )=> {
         const mediaFactory = new MediaFactory(media)
 
         const mediaElement = mediaFactory.createMedia()
         const titleElement = mediaFactory.createTitle()
         const likesElement = mediaFactory.createLikes()
-
+        
 
         const mediaCard = document.createElement('div')
          mediaCard.setAttribute('tabindex','0')
@@ -47,7 +50,7 @@ async function displayMedia(photographerId) {
         mediaWindow.classList.add('media-window')
         const mediaTxt = document.createElement('div')
         mediaTxt.classList.add('media-txt')
-        
+        //ajoute les element au DOM
         mediaWindow.appendChild(mediaElement)
         mediaTxt.appendChild(titleElement)
         mediaTxt.appendChild(likesElement)
@@ -60,10 +63,17 @@ async function displayMedia(photographerId) {
         mediaCard.appendChild(mediaTxt)
         mediaContainer.appendChild(mediaCard)
 
+        likesElement.addEventListener('click', (event) => {
+            event.stopPropagation(); // Empêche la propagation du clic
+            const mediaId = media.id; // Utilise l'ID du média directement
+            likesManagement.likesCount(mediaId, likesElement, likesEl); // Gère le clic sur les likes
+        });
+//ajoute eventlistner sur les media pour ouvrir lightbox
         mediaCard.addEventListener('click',()=>{
             const lightbox = new Lightbox (photographerMedia, index)
             lightbox.open()
         })
+        
 
     });
     
@@ -73,13 +83,19 @@ async function displayMedia(photographerId) {
 async function displayPhotographer() {
     const params = new URLSearchParams(window.location.search)
     const id = params.get('id')
-    
-
     const photographers = await getPhotographers()
     const photographer= photographers.find(p=>p.id == id)
+
+    const mediaList = await getMedia()
+
+    const totalLikes = await calculateTotalLikes()
+    
+
+   
 //affiche le photographe en fonction de l'id
     if (photographer) {
         const headerTxt = document.querySelector('.header-txt')
+        
         const headerTitle = document.createElement('div')
         const headerSubtext = document.createElement('div')
         headerSubtext.setAttribute("tabindex", "0")
@@ -97,6 +113,7 @@ async function displayPhotographer() {
         taglineElement.textContent= photographer.tagline
         taglineElement.classList.add('header-tagline')
 
+       
         headerTitle.appendChild(nameEl)
         headerSubtext.appendChild(locationEL)
         headerSubtext.appendChild(taglineElement)
@@ -113,22 +130,21 @@ async function displayPhotographer() {
 
         imgContainer.appendChild (img)
 
-        //ajoute le total de like et le prix
-        const totalLikes = await calculateTotalLikes()
+        //affiche prix et total likes
         const likesAndPrice = document.querySelector('.total-likes_price')
-        const priceEl = document.createElement('span')
+         const priceEl = document.createElement('span')
         priceEl.textContent= `${photographer.price}€/jour`
-        priceEl.classList.add('photographer-price')
-        
-        const likesEl = document.createElement('span')
-        likesEl.textContent = `${totalLikes}`
-        likesEl.classList.add('photographer-total_likes')
-        
+         priceEl.classList.add('photographer-price')
+
+         const likesEl = document.createElement('span')
+         likesEl.textContent = `${totalLikes}`
+         likesEl.classList.add('photographer-total_likes')
+            
         likesAndPrice.appendChild(likesEl)
         likesAndPrice.appendChild(priceEl)
-       
-
-        displayMedia(photographer.id)
+        
+        
+         await displayMedia(photographer.id, likesEl)
 
     } else {
         console.error('error')
