@@ -51,8 +51,13 @@ async function displayMedia(photographerId,likesEl, sortedMedialist = null) {
 
         const mediaWindow = document.createElement('div')
         mediaWindow.classList.add('media-window')
+
         const mediaTxt = document.createElement('div')
         mediaTxt.classList.add('media-txt')
+        
+        titleElement.setAttribute('tabindex','0')
+        likesElement.setAttribute('tabindex','0')
+
         //ajoute les element au DOM
         mediaWindow.appendChild(mediaElement)
         mediaTxt.appendChild(titleElement)
@@ -65,18 +70,24 @@ async function displayMedia(photographerId,likesEl, sortedMedialist = null) {
         mediaCard.appendChild(mediaWindow)
         mediaCard.appendChild(mediaTxt)
         mediaContainer.appendChild(mediaCard)
-
+//ajoute gestion des likes au click
         likesElement.addEventListener('click', (event) => {
             event.stopPropagation(); 
             const mediaId = media.id; 
             likesManagement.likesCount(mediaId, likesElement, likesEl); 
         });
-//ajoute eventlistner sur les media pour ouvrir lightbox
+//ouvre lightbox au click
         mediaCard.addEventListener('click',()=>{
             const lightbox = new Lightbox (photographerMedia, index)
             lightbox.open()
         })
-        
+     //ouvre lightbox avec 'enter'
+     mediaCard.addEventListener('keydown', (event)=>{
+        if (event.key === 'Enter') {
+            const lightbox = new Lightbox (photographerMedia, index)
+            lightbox.open()
+        }
+     })
 
     });
     
