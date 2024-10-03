@@ -8,12 +8,14 @@ function displayModal() {
 
     const modal = document.getElementById("contact_modal")
 	modal.style.display = "flex"
+    modal.setAttribute('aria-hidden', "false")
     
 
     const closeBtn = document.getElementById("close-btn")
     closeBtn.addEventListener("click", ()=> {
         closeModal()
     })
+
 
     document.addEventListener("keydown", handleEscapeKey)
 
@@ -50,6 +52,7 @@ function handleEscapeKey (event) {
 
 function closeModal() {
     const modal = document.getElementById("contact_modal")
+    modal.removeAttribute('aria-hidden')
     modal.style.display = "none"
     modalbtn.focus()
     

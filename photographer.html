@@ -58,7 +58,7 @@
 				<form>
 
 					<div class="form-data">
-						<label tabindex="0">Prénom</label>
+						<label for="first" tabindex="0">Prénom</label>
             <input  tabindex="0"
             class="text-control"
             type="text"
@@ -67,7 +67,7 @@
 					</div>
 
           <div class="form-data">
-						<label tabindex="0">Nom</label>
+						<label for="last" tabindex="0">Nom</label>
             <input  tabindex="0"
             class="text-control"
             type="text"
@@ -76,7 +76,7 @@
 					</div>
 
           <div class="formData">
-         <label tabindex="0">E-mail</label>
+         <label for="email" tabindex="0">E-mail</label>
           <input tabindex="0"
             class="text-control"
             type="email"
@@ -85,14 +85,14 @@
         </div>
 
         <div class="formData" >
-        <label tabindex="0">Votre message</label>
+        <label for="message" tabindex="0">Votre message</label>
         <textarea tabindex="0"
           class="text-control"
           id="message"
           name="message"></textarea>
       </div>
 
-          <button class="contact_button" tabindex="0">Envoyer</button>
+          <button class="contact_button" tabindex="0" aria-label ="Envoyer le formulaire de contact">Envoyer</button>
           <img src="assets/icons/close.svg" id="close-btn" tabindex="0" />
 
 				</form>
@@ -102,14 +102,14 @@
 		</div>
 
     <!--lightbox-->
-    <section class="lightbox-modal"role="dialog">
+    <section class="lightbox-modal"role="dialog" aria-hidden="true" >
 
-    <div class="lightbox-modal_body" tabindex="0">
+    <div class="lightbox-modal_body" tabindex="0" >
 
       <div class = "media-display">
-      <button class="lightbox-prev" aria-label="Jump to next picture" tabindex="0"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="lightbox-prev" aria-label="Jump to previous picture" tabindex="0"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="lightbox-container" tabindex="0"></div>
-      <button class="lightbox-next" arial-label="Jump to previous picture" tabindex="0"><i class="fa-solid fa-chevron-right"></i></button>
+      <button class="lightbox-next" arial-label="Jump to next picture" tabindex="0"><i class="fa-solid fa-chevron-right"></i></button>
       <button class="lightbox-close" aria-label="Close the lightbox" tabindex="0"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -117,7 +117,7 @@
         <h2 class ="lightbox-title" tabindex="0"></h2>
       </div> 
     </div>
-    
+
     </section>
 
 

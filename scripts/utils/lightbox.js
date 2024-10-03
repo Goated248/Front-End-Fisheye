@@ -25,13 +25,15 @@ export class Lightbox {
         this.displayMedia()
         this.displayTitle ()
         this.lightboxElement.style.display = 'flex'
-        
+        this.lightboxElement.setAttribute('aria-hidden', "false")
+
         this.trapFocus()
+
         document.addEventListener('keydown', (event) => this.handleKeyDown(event))
     }
 
     close (){
-
+        this.lightboxElement.removeAttribute('aria-hidden')
         this.lightboxElement.style.display = 'none'
 
         if (this.lastFocusedElement) {
@@ -80,26 +82,30 @@ export class Lightbox {
     }
     
     trapFocus() {
-        const focusableElements = this.lightboxElement.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])')
-        const firstFocusableElement = focusableElements[0]
-        const lastFocusableElement = focusableElements[focusableElements.length - 1]
-        firstFocusableElement.focus()
+        const focusOrder = [
+            this.lightboxElement.querySelector('.lightbox-modal_body'),
+            this.lightboxElement.querySelector('.lightbox-container'),
+            this.lightboxElement.querySelector('.lightbox-title'),
+            this.lightboxElement.querySelector('.lightbox-prev'),
+            this.lightboxElement.querySelector('.lightbox-next'),
+            this.lightboxElement.querySelector('.lightbox-close')
+        ]
+
+        let currentFocusIndex = 0
+        focusOrder[currentFocusIndex].focus()
+
 
         this.lightboxElement.addEventListener('keydown', (event) => {
-            let isTabPressed = (event.key === 'Tab')
+            if (event.key === 'Tab') {
+                event.preventDefault()
 
-            if (!isTabPressed) return
-
-            if (event.shiftKey) {
-                if (document.activeElement === firstFocusableElement) {
-                    lastFocusableElement.focus()
-                    event.preventDefault()
+                if(event.shiftKey) {
+                    currentFocusIndex = (currentFocusIndex - 1 +focusOrder.length) % focusOrder.length
+                } else {
+                    currentFocusIndex = (currentFocusIndex + 1) % focusOrder.length
                 }
-            } else {
-                if (document.activeElement === lastFocusableElement) {
-                    firstFocusableElement.focus()
-                    event.preventDefault()
-                }
+                
+                focusOrder[currentFocusIndex].focus()
             }
         })
     }
