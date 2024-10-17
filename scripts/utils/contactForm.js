@@ -7,14 +7,25 @@ modalbtn.addEventListener("click", ()=>{
 function displayModal() {
 
     const modal = document.getElementById("contact_modal")
+    const main = document.querySelector('main')
+    const header = document.querySelector('header')
 	modal.style.display = "flex"
     modal.setAttribute('aria-hidden', "false")
-    
+    main.setAttribute('aria-hidden', "true")
+    header.setAttribute('aria-hidden', "true")
 
     const closeBtn = document.getElementById("close-btn")
-    closeBtn.addEventListener("click", ()=> {
+    closeBtn.addEventListener("click", (event)=> {
+        event.preventDefault()
         closeModal()
     })
+
+    const submitForm = document.querySelector("form")
+    submitForm.addEventListener("submit",((event) => {
+        event.preventDefault()
+        getFormElements()
+        closeModal()
+    }))
 
 
     document.addEventListener("keydown", handleEscapeKey)
@@ -52,8 +63,25 @@ function handleEscapeKey (event) {
 
 function closeModal() {
     const modal = document.getElementById("contact_modal")
+    const main = document.querySelector('main')
+    const header = document.querySelector('header') 
     modal.removeAttribute('aria-hidden')
+    main.removeAttribute('aria-hidden')
+    header.removeAttribute('aria-hidden')
     modal.style.display = "none"
     modalbtn.focus()
     
+}
+
+
+function getFormElements() {
+    const champPrenom = document.getElementById("first")
+    const champNom = document.getElementById("last")
+    const champEmail= document.getElementById("email")
+    const champMessage = document.getElementById("message")
+    const prenom = champPrenom.value
+    const nom = champNom.value
+    const email = champEmail.value
+    const message = champMessage.value
+    console.log (prenom, nom , email, message)
 }

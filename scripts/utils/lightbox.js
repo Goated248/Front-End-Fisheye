@@ -20,22 +20,23 @@ export class Lightbox {
 
     open() {
         this.lastFocusedElement =document.activeElement
-            
+        const body = document.querySelector('body')   
 
         this.displayMedia()
         this.displayTitle ()
         this.lightboxElement.style.display = 'flex'
         this.lightboxElement.setAttribute('aria-hidden', "false")
-
+        
         this.trapFocus()
-
+        body.setAttribute('aria-hidden', "true")
         document.addEventListener('keydown', (event) => this.handleKeyDown(event))
     }
 
     close (){
         this.lightboxElement.removeAttribute('aria-hidden')
         this.lightboxElement.style.display = 'none'
-
+        const body = document.querySelector('body') 
+        body.removeAttribute('aria-hidden')
         if (this.lastFocusedElement) {
             this.lastFocusedElement.focus()
         }

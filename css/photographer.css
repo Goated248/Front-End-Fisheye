@@ -95,10 +95,30 @@
     
 }
 
-#close-btn {
+
+.modal header {
+    padding-bottom:35px ;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.modal-close{
+    background: none;
+    color: white;
+    border: none;
+    font-size: 55px;
+    cursor: pointer;
     position: absolute;
     right:25px;
-    top:-65px;
+    top:-120px;
+}
+
+header .photographer-name {
+    color: black;
+    margin: 0;
+    padding: 0 0 5px 35px;
+    font-size: 64px;
 }
 
 .modal header h2 {
@@ -106,9 +126,10 @@
     font-weight: normal;
     text-align: center;
     color: black;
-    padding-left:20px;
+    padding-left:35px;
     
 }
+
 
 form {
     display: flex;

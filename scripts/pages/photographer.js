@@ -125,6 +125,8 @@ async function displayPhotographer() {
         taglineElement.textContent= photographer.tagline
         taglineElement.classList.add('header-tagline')
 
+        const contactName = document.querySelector(".photographer-name")
+        contactName.textContent = `${photographer.name}`
        
         headerTitle.appendChild(nameEl)
         headerSubtext.appendChild(locationEL)
