@@ -4,7 +4,7 @@ export class MediaFactory {
         this._title = media.title
         this._likes = media.likes
     }
-
+    //creation du media en fonction de si photo ou video
     createMedia() {
         let mediaElement
 

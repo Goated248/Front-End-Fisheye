@@ -11,7 +11,7 @@
   </head>
   <body>
     <header role="banner">
-      <a href="index.html" tabindex="0" ><img src="assets/images/logo.png" alt="fisheye Home page" class="logo" /></a>
+      <a href="index.html" tabindex="-1"><img src="assets/images/logo.png" alt="fisheye Home page" class="logo" tabindex="0"/></a>
     </header>
 
     <main id="main">
@@ -29,11 +29,14 @@
       <section class="tri">
         <div class="tri-option"  >
           <label for="tri-select" tabindex="0">Trier par :</label>
-          <select id="tri-select" tabindex="0">
-              <option value="title">Titre</option>
-              <option value="date">Date</option>
-              <option value="likes">Popularité</option>
+          <select id="tri-select" tabindex="0" aria-describedby="tri-description">
+              <option value="title" aria-label="Trier par ordre alphabétique">Titre</option>
+              <option value="date" aria-label="Trier par ordre chronologique">Date</option>
+              <option value="likes" aria-label="Trier par nombre de likes">Popularité</option>
           </select>
+          <p id="tri-description" class = "tri-description">
+            Permet de trier les photos par titre, date ou popularité.
+          </p>
       </div>
       </section>
       <section class ="media-gallery"></section>

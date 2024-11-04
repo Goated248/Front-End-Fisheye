@@ -17,7 +17,7 @@ export class Lightbox {
 
         this.addEventListeners()
     }
-
+//ouverture de la lightbox
     open() {
         this.lastFocusedElement =document.activeElement
         const body = document.querySelector('body')   
@@ -31,7 +31,7 @@ export class Lightbox {
         body.setAttribute('aria-hidden', "true")
         document.addEventListener('keydown', (event) => this.handleKeyDown(event))
     }
-
+//fermeture de la lightbox
     close (){
         this.lightboxElement.removeAttribute('aria-hidden')
         this.lightboxElement.style.display = 'none'
@@ -43,7 +43,7 @@ export class Lightbox {
 
         document.removeEventListener('keydown', (event) => this.handleKeyDown(event))
     }
-
+//affiche le media en fonction de son format
     displayMedia() {
         const media = this.mediaList[this.currentMediaIndex]
         this.mediaContainer.innerHTML = ''
@@ -69,19 +69,19 @@ export class Lightbox {
         this.lightboxTitle.appendChild(mediaTitle)
         
     }
-
+//passage au media suivant
     nextMedia(){
         this.currentMediaIndex = (this.currentMediaIndex + 1) % this.mediaList.length
         this.displayMedia()
         this.displayTitle ()
     }
-
+//passage au media precedent
     prevMedia() {
         this.currentMediaIndex = (this.currentMediaIndex - 1 + this.mediaList.length) % this.mediaList.length
         this.displayMedia()
         this.displayTitle ()
     }
-    
+ //gestion du focus dans la lightbox   
     trapFocus() {
         const focusOrder = [
             this.lightboxElement.querySelector('.lightbox-modal_body'),
@@ -95,7 +95,7 @@ export class Lightbox {
         let currentFocusIndex = 0
         focusOrder[currentFocusIndex].focus()
 
-
+//gestion de la navigation avec tab
         this.lightboxElement.addEventListener('keydown', (event) => {
             if (event.key === 'Tab') {
                 event.preventDefault()
@@ -119,7 +119,7 @@ export class Lightbox {
         this.prevBtn.addEventListener('click', ()=>this.prevMedia())
         
     }
-
+//navigation dans la lightboxx au clavier
     handleKeyDown(event) {
         if(event.key === 'Escape' || event.key === 'Esc') {
             this.close()

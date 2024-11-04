@@ -3,7 +3,7 @@ modalbtn.addEventListener("click", ()=>{
     displayModal()
     document.querySelector('.modal').focus()
 })
-
+//affichage de la modale et empeche le rechargement de la page
 function displayModal() {
 
     const modal = document.getElementById("contact_modal")
@@ -30,6 +30,7 @@ function displayModal() {
 
     document.addEventListener("keydown", handleEscapeKey)
 
+    //gestion du focus dans la modale
     const focusableElements = modal.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])')
     let firstFocusableElement = focusableElements[0]
     let lastFocusableElement = focusableElements[focusableElements.length - 1]
@@ -54,7 +55,7 @@ function displayModal() {
 
     })
 }
-
+//fermeture de la modale avec echap
 function handleEscapeKey (event) {
     if (event.key ==='Escape' || event.key === 'Esc') {
         closeModal()
@@ -73,7 +74,7 @@ function closeModal() {
     
 }
 
-
+//recupère les informations des champs du formulaire
 function getFormElements() {
     const champPrenom = document.getElementById("first")
     const champNom = document.getElementById("last")
