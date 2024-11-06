@@ -20,7 +20,8 @@ export class Lightbox {
 //ouverture de la lightbox
     open() {
         this.lastFocusedElement =document.activeElement
-        const body = document.querySelector('body')   
+        const main = document.querySelector('main')
+        const header = document.querySelector('header') 
 
         this.displayMedia()
         this.displayTitle ()
@@ -28,15 +29,18 @@ export class Lightbox {
         this.lightboxElement.setAttribute('aria-hidden', "false")
         
         this.trapFocus()
-        body.setAttribute('aria-hidden', "true")
+        main.setAttribute('aria-hidden', "true")
+        header.setAttribute('aria-hidden', "true")
         document.addEventListener('keydown', (event) => this.handleKeyDown(event))
     }
 //fermeture de la lightbox
     close (){
         this.lightboxElement.removeAttribute('aria-hidden')
         this.lightboxElement.style.display = 'none'
-        const body = document.querySelector('body') 
-        body.removeAttribute('aria-hidden')
+        const main = document.querySelector('main')
+        const header = document.querySelector('header')  
+        main.removeAttribute('aria-hidden')
+        header.removeAttribute('aria-hidden')
         if (this.lastFocusedElement) {
             this.lastFocusedElement.focus()
         }
