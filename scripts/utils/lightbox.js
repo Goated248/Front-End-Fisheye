@@ -56,7 +56,9 @@ export class Lightbox {
         
         const mediaFactory = new MediaFactory(media)
         const mediaElement = mediaFactory.createMedia()
-
+        if (mediaElement && mediaElement.tagName==='VIDEO'){
+            mediaElement.setAttribute('controls', 'true')
+        }
         this.mediaContainer.appendChild(mediaElement)
     }
 
