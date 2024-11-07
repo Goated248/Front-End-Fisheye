@@ -1,3 +1,5 @@
+import {MediaFactory} from '../factories/MediaFactory.js'
+
 export class Lightbox {
 
     constructor(mediaList, currentMediaIndex){
@@ -52,17 +54,9 @@ export class Lightbox {
         const media = this.mediaList[this.currentMediaIndex]
         this.mediaContainer.innerHTML = ''
         
-        let mediaElement
+        const mediaFactory = new MediaFactory(media)
+        const mediaElement = mediaFactory.createMedia()
 
-        if(media.image){
-            mediaElement = document.createElement('img')
-            mediaElement.setAttribute ('src',`assets/media/${media.image}`)
-            mediaElement.setAttribute ('alt', media.title)
-        } else if (media.video){
-            mediaElement = document.createElement('video')
-            mediaElement.setAttribute('src',`assets/media/${media.video}`)
-            mediaElement.setAttribute('controls', 'true')
-        }
         this.mediaContainer.appendChild(mediaElement)
     }
 

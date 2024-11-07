@@ -28,7 +28,7 @@ export class MediaFactory {
     createVideo() {
         const video = document.createElement('video')
         video.setAttribute('src',`assets/media/${this._media.video}`)
-        video.setAttribute('controls','true')
+        
         return video
     }
 

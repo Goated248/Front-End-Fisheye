@@ -70,12 +70,18 @@ async function displayMedia(photographerId,likesEl, sortedMedialist = null) {
         mediaCard.appendChild(mediaWindow)
         mediaCard.appendChild(mediaTxt)
         mediaContainer.appendChild(mediaCard)
-//ajoute gestion des likes au click
+//ajoute gestion des likes au click et avec 'enter'
         likesElement.addEventListener('click', (event) => {
-            event.stopPropagation(); 
-            const mediaId = media.id; 
-            likesManagement.likesCount(mediaId, likesElement, likesEl); 
+            event.stopPropagation() 
+            const mediaId = media.id
+            likesManagement.likesCount(mediaId, likesElement, likesEl)
         });
+        likesElement.addEventListener('keydown', (event)=>{
+            event.stopPropagation()
+            const mediaId = media.id
+            likesManagement.likesCount(mediaId, likesElement, likesEl)
+        })
+
 //ouvre lightbox au click
         mediaCard.addEventListener('click',()=>{
             const lightbox = new Lightbox (photographerMedia, index)
